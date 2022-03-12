@@ -11,7 +11,13 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'timeZone' => 'Asia/Jakarta', 
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            // uncomment if you want to cache RBAC items hierarchy
+            // 'cache' => 'cache',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'y1FnzJEXJQ9xtTKgvt3DYWwFpx6MmHmB',
@@ -22,6 +28,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => array('auth/login') 
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -43,16 +50,15 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
+    'defaultRoute' => 'admin/dashboard',
 ];
 
 if (YII_ENV_DEV) {

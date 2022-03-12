@@ -20,12 +20,12 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['index'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -64,65 +64,65 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+    // /**
+    //  * Login action.
+    //  *
+    //  * @return Response|string
+    //  */
+    // public function actionLogin()
+    // {
+    //     if (!Yii::$app->user->isGuest) {
+    //         return $this->goHome();
+    //     }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
+    //     $model = new LoginForm();
+    //     if ($model->load(Yii::$app->request->post()) && $model->login()) {
+    //         return $this->goBack();
+    //     }
 
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
+    //     $model->password = '';
+    //     return $this->render('login', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
+    // /**
+    //  * Logout action.
+    //  *
+    //  * @return Response
+    //  */
+    // public function actionLogout()
+    // {
+    //     Yii::$app->user->logout();
 
-        return $this->goHome();
-    }
+    //     return $this->goHome();
+    // }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+    // /**
+    //  * Displays contact page.
+    //  *
+    //  * @return Response|string
+    //  */
+    // public function actionContact()
+    // {
+    //     $model = new ContactForm();
+    //     if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+    //         Yii::$app->session->setFlash('contactFormSubmitted');
 
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
+    //         return $this->refresh();
+    //     }
+    //     return $this->render('contact', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+    // /**
+    //  * Displays about page.
+    //  *
+    //  * @return string
+    //  */
+    // public function actionAbout()
+    // {
+    //     return $this->render('about');
+    // }
 }
